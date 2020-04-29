@@ -1,3 +1,5 @@
+<?php
+session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +22,13 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" id="signup-form" class="traitement.php">
+                    <form method="POST" id="signup-form" action="../traitement-2.php">
                         <h2 class="form-title">Login</h2>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="pseudo" id="email" placeholder="Your Email"/>
+                            <input type="text" class="form-input" name="pseudo" id="pseudo" placeholder="Username"/>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="mdp" id="password" placeholder="Password"/>
+                            <input type="password" class="form-input" name="mdp" id="mdp" placeholder="Password"/>
                             <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                         </div>
                       

@@ -3,18 +3,25 @@ session_start();
 
 
 //connexion bdd
-require_once('class_database.php');
+require_once('class_bdd.php');
 
-$connexion_bdd = new database('db5000303643.hosting-data.io', 'dbs296630', 'dbu167304', '2p4!Z^Xf');
+$connexion_bdd = new database('localhost', 'dbs296630', 'root', '');
 $bdd = $connexion_bdd->PDOConnexion();
 
 
+//inscription
 
-//connexion user 
-require_once('class_user.php');
+require_once('class_signup.php');
 
-$pseudo = !empty($_POST['pseudo']) ? $_POST['pseudo'] : NULL;
-$mdp = !empty($_POST['mdp']) ? $_POST['mdp'] : NULL;
+$_pseudo = !empty($_POST['pseudo']) ? $_POST['pseudo'] : NULL;
+$_mdp = !empty($_POST['mdp']) ? $_POST['mdp'] : NULL;
+$_email = !empty($_POST['email']) ? $_POST['email'] : NULL;
+$_nom= !empty($_POST['nom']) ? $_POST['nom'] : NULL;
+$_prenom = !empty($_POST['prenom']) ? $_POST['prenom'] : NULL;
 
-$user1= new user ($pseudo, $mdp);
-$user1->connexion($bdd);
+$user1= new User ($_nom, $_prenom, $_pseudo, $_email, $_mdp);
+$user1->signup($bdd);
+
+
+
+

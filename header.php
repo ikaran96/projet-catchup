@@ -16,7 +16,23 @@
 						<ul class="nav-menu nav navbar-nav">
 							<li><a href="category.html">News</a></li>
 							<li><a href="category.html">Popular</a></li>
+							<?php
+							if(isset($_SESSION['pseudo'])){?>
+							<li class="cat-1"><a href="signin\deconnect.php">Hello <?php echo $_SESSION['pseudo'];?> </a></li>
+							<li class="cat-1"><a href="signin\deconnect.php">Log out</a></li>
+							<?php }else{?>
 							<li class="cat-1"><a href="signin\signin.php">Sign in/Sign up</a></li>
+							<?php }?>
+
+							<?php 
+							if(isset($_SESSION['admin'])){ ?>
+							
+							<li class="cat-1"><a href="signin\signin.php">Admin</a></li>
+
+							<?php }if(isset($_SESSION['user'])){?>
+							<li class="cat-1"><a href="signin\signin.php">User</a></li>		
+						<?php	} ?>
+							
 						</ul>
 						<!-- /nav -->
 

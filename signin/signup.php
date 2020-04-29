@@ -20,22 +20,22 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" id="signup-form" class="traitement.php">
+                    <form method="POST" id="signup-form" action="../traitement.php">
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="nom" id="name" placeholder="Your Name"/>
+                            <input type="text" class="form-input" name="nom" id="nom" placeholder="Nom"/>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="prenom" id="name" placeholder="Your Name"/>
+                            <input type="text" class="form-input" name="prenom" id="prenom" placeholder="Prenom"/>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="pseudo" id="email" placeholder="Your Email"/>
+                            <input type="text" class="form-input" name="pseudo" id="pseudo" placeholder="Pseudo"/>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Email"/>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="mdp" id="password" placeholder="Password"/>
+                            <input type="password" class="form-input" name="mdp" id="mdp" placeholder="Password"/>
                             <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                         </div>
                       
