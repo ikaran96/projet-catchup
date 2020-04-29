@@ -43,8 +43,30 @@ class User{
             if ($count == 0) {
                 $req = $bdd->prepare("INSERT INTO T_User SET Nom = ?, Prenom = ?, Email = ?, Mdp = ?, Pseudo = ?,Token = ?, id_typeuser = 3, Actif =0");
                 $req->execute([$this->_nom, $this->_prenom, $this->_email, $this->_mdp, $this->_pseudo, $this->_token]);
+                
+                // Préparation du mail contenant le lien d'activation
+                    $destinataire = $this->_email;
+                    $sujet = "Activer votre compte" ;
+                    $entete = "From: inscription@votresite.com" ;
+                    
+                    // Le lien d'activation est composé du login(log) et de la clé(cle)
+                    $message = 'Bienvenue sur VotreSite,
+                    
+                    Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
+                    ou copier/coller dans votre navigateur Internet.
+                    
+                    http://karan.simplon-charleville.fr/catchup/activation.php?activation='.urlencode($this->_token).'
+                    
+                    
+                    ---------------
+                    Ceci est un mail automatique, Merci de ne pas y répondre.';
+                    
+                    
+                    mail($destinataire, $sujet, $message, $entete) ; // Envoi du mail
+
+
                 echo "Inscription reussie <br> verifiez votre mail";
-                // envoyer le mail (a faire)
+            
             } else {
                 echo "mail deja pris";
                 echo '<a href="connexion.php">Réésayez</a>';

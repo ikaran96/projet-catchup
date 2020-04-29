@@ -1,61 +1,17 @@
 <?php
-class User2
-{
-    private $_pseudo;
-    private $_email;
-    private $_mdp;
-    private $_token;
-    private $_actif;
-
-    public function __construct($_pseudo, $_mdp)
-    {
-        $this->_pseudo = $_pseudo;
-        $this->_mdp = $_mdp;
-        $this->_actif = 0;
-    }
+session_start();
 
 
+//connexion bdd
+require_once('class_bdd.php');
 
-    public function verifToken($bdd)
-    {
-        $bool = false;
-        $req = $bdd->prepare("SELECT valid FROM user WHERE pseudo = ?");
-        $req->execute([$this->pseudo]);
-        $valid = $req->fetch();
-        if ($valid['valid'] == "1") {
-            $bool = true;
-        }
-        return $bool;
-    }
+$connexion_bdd = new database('localhost', 'dbs296630', 'root', '');
+$bdd = $connexion_bdd->PDOConnexion();
 
+require_once('class_user.php');
 
-    public function verifConect($bdd)
-    {
-        $req = $bdd->prepare("SELECT * FROM user WHERE pseudo = ? AND mdp = ?");
-        $req->execute([$this->pseudo, $this->mdp]);
-        $donnee = $req->fetch();
+$_pseudo = !empty($_POST['pseudo']) ? $_POST['pseudo'] : NULL;
+$_mdp = !empty($_POST['mdp']) ? $_POST['mdp'] : NULL;
 
-        $this->email = $donnee['email'];
-
-        $count = $req->rowCount();
-
-        if ($count > 0) {
-            $bool = $this->verifToken($bdd);
-            if ($bool == true) {
-                session_start();
-                $this->valid = 1;
-                $_SESSION['pseudo'] = $this->pseudo;
-                $_SESSION['mdp'] = $this->mdp;
-                $_SESSION['validation_token'] = $this->valid;
-                header("location:index.php");
-            } else {
-                echo "verifiez la confirmation de votre adresse mail <br>";
-                echo '<a href="index.php">Retournez a lacceuil</a>';
-            }
-        } else {
-
-            //Mauvais identifiant ou mauvais tout cours
-            header("location:index6.php");
-        }
-    }
-}
+$user1 = new User($_pseudo, $_mdp);
+$user1->verifConect($bdd);

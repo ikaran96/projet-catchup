@@ -1,108 +1,61 @@
 <?php
+class User
+{
+    private $_pseudo;
+    private $_email;
+    private $_mdp;
+    private $_token;
+    private $_actif;
 
-class User{
-    protected $_pseudo;
-    protected $_mdp;
-    protected $_typeuser1;
-    protected $_typeuser2;
-    protected $_typeuser3;
-
-
-    public function __construct($_pseudo,$_mdp){
+    public function __construct($_pseudo, $_mdp)
+    {
         $this->_pseudo = $_pseudo;
         $this->_mdp = $_mdp;
-        $this->_typeuser1 = 1;
-        $this->_typeuser2 = 2;
-        $this->_typeuser3 = 3;
+        $this->_actif = 0;
     }
 
-    //getters
-    public function getPseudo(){
-        return $this->_pseudo;
+
+
+    public function verifToken($bdd)
+    {
+        $bool = false;
+        $req = $bdd->prepare("SELECT Actif FROM T_User WHERE Pseudo = ?");
+        $req->execute([$this->_pseudo]);
+        $actif = $req->fetch();
+        if ($actif['Actif'] == "1") {
+            $bool = true;
+        }
+        return $bool;
     }
 
-    public function getMdp(){
-        return $this->_mdp;
-    }
 
-  
-    //setters
-    public function setPseudo($Pseudo){
-        $this->_pseudo = $Pseudo;
-       
-    }
-    public function setMdp($Mdp){
-        $this->_mdp = $Mdp;
-       
-    }
-    
+    public function verifConect($bdd)
+    {
+        $req = $bdd->prepare("SELECT * FROM T_User WHERE Pseudo = ? AND Mdp = ?");
+        $req->execute([$this->_pseudo, $this->_mdp]);
+        $donnees = $req->fetch();
 
-    public function connexion_admin($bdd){
-        $pseudo = $this->_pseudo;
-        $mdp = $this->_mdp;
-        $req = $bdd->prepare("SELECT * FROM T_User WHERE pseudo = :pseudo AND mdp = :mdp");
-        $req->execute(array(
-                    'pseudo' =>  $this->_pseudo,
-                    'mdp' => $this->_mdp
-        ));
+        $this->_email = $donnees['Email'];
 
         $count = $req->rowCount();
-        if($count > 0)
-        {
-            session_start();
-            $_SESSION['pseudo'] =  $this->_pseudo;
-            $_SESSION['mdp'] = $this->_mdp;
-            $_SESSION['admin'] =  $this->_typeuser1;
-            header("location:index.php");
-        }
-        else{
-            header("location:index.php?error");
-        }
-    }
 
+        if ($count > 0) {
+            $bool = $this->verifToken($bdd);
+            if ($bool == true) {
+                session_start();
+                $this->_actif = 1;
+                $_SESSION['Pseudo'] = $this->_pseudo;
+                $_SESSION['Mdp'] = $this->_mdp;
+                $_SESSION['Actif'] = $this->_actif;
+                header("location:index.php");
+            } else {
+                echo "verifiez la confirmation de votre adresse mail <br>";
+                echo '<a href="index.php">Retournez a lacceuil</a>';
+            }
+        } else {
 
-    public function connexion_mod($bdd){
-        $pseudo = $this->_pseudo;
-        $mdp = $this->_mdp;
-        $req = $bdd->prepare("SELECT * FROM T_User WHERE pseudo = :pseudo AND mdp = :mdp AND id_typeuser = 2");
-        $req->execute(array(
-                    'pseudo' =>  $this->_pseudo,
-                    'mdp' => $this->_mdp
-        ));
-
-        $count = $req->rowCount();
-        if($count > 0)
-        {
-            session_start();
-            $_SESSION['pseudo'] =  $this->_pseudo;
-            $_SESSION['mdp'] = $this->_mdp;
-            $_SESSION['mod'] =  $this->_typeuser2;
-            header("location:index.php");
-        }else{
-            header("location:index.php?error");
-        }
-    }
-
-
-    public function connexion_user($bdd){
-        $pseudo = $this->_pseudo;
-        $mdp = $this->_mdp;
-        $req = $bdd->prepare("SELECT * FROM T_User WHERE pseudo = :pseudo AND mdp = :mdp AND id_typeuser = 3");
-        $req->execute(array(
-                    'pseudo' =>  $this->_pseudo,
-                    'mdp' => $this->_mdp
-        ));
-
-        $count = $req->rowCount();
-        if($count > 0)
-        {
-            session_start();
-            $_SESSION['pseudo'] =  $this->_pseudo;
-            $_SESSION['mdp'] = $this->_mdp;
-            $_SESSION['user'] =  $this->_typeuser3;
-            header("location:index.php");
-        }else{
-            header("location:index.php?error");
+            //Mauvais identifiant ou mauvais tout cours
+            header("location:index6.php");
         }
     }
 }
