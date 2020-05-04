@@ -8,31 +8,32 @@
 					<div class="container">
 						<!-- logo -->
 						<div class="nav-logo">
-							<a href="index.html" class="logo"><img src="./img/logonav.png" alt=""></a>
+							<a href="index.php" class="logo"><img src="./assets/img/logonav.png" alt=""></a>
 						</div>
 						<!-- /logo -->
 
 						<!-- nav -->
 						<ul class="nav-menu nav navbar-nav">
-							<li><a href="category.html">News</a></li>
-							<li><a href="category.html">Popular</a></li>
 							<?php
-							if(isset($_SESSION['pseudo'])){?>
-							<li class="cat-1"><a href="signin\deconnect.php">Hello <?php echo $_SESSION['pseudo'];?> </a></li>
+							if(isset($_SESSION['Pseudo'])){?>
+							<li class="cat-1"><a href="signin\deconnect.php">Hello <?php echo $_SESSION['Pseudo'];?> </a></li>
 							<li class="cat-1"><a href="signin\deconnect.php">Log out</a></li>
 							<?php }else{?>
 							<li class="cat-1"><a href="signin\signin.php">Sign in/Sign up</a></li>
 							<?php }?>
 
 							<?php 
-							if(isset($_SESSION['admin'])){ ?>
+							if(isset($_SESSION['Admin'])){ ?>
 							
-							<li class="cat-1"><a href="signin\signin.php">Admin</a></li>
+							<li class="cat-1"><a href="admin.php">Admin</a></li>
+							<?php 
+							}if(isset($_SESSION['Mod'])){ ?>
+							
+							<li class="cat-1"><a href="signin\signin.php">Mod</a></li>
 
-							<?php }if(isset($_SESSION['user'])){?>
+							<?php }if(isset($_SESSION['User'])){?>
 							<li class="cat-1"><a href="signin\signin.php">User</a></li>		
-						<?php	} ?>
-							
+							<?php	} ?>
 						</ul>
 						<!-- /nav -->
 
@@ -55,7 +56,7 @@
 					<!-- nav -->
 					<div class="section-row">
 						<ul class="nav-aside-menu">
-							<li><a href="index.html">Home</a></li>
+							<li><a href="index.php">Home</a></li>
 							<li><a href="about.html">About Us</a></li>
 							<li><a href="#">Join Us</a></li>
 							<li><a href="#">Advertisement</a></li>

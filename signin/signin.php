@@ -22,7 +22,7 @@ session_start();?>
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" id="signup-form" action="../traitement-2.php">
+                    <form method="POST" id="signup-form" action="../traitement/traitement-2.php">
                         <h2 class="form-title">Login</h2>
                         <div class="form-group">
                             <input type="text" class="form-input" name="pseudo" id="pseudo" placeholder="Username"/>

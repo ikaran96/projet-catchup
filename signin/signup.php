@@ -20,7 +20,7 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" id="signup-form" action="../traitement.php">
+                    <form method="POST" id="signup-form" action="../traitement/traitement.php">
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
                             <input type="text" class="form-input" name="nom" id="nom" placeholder="Nom"/>
@@ -37,6 +37,11 @@
                         <div class="form-group">
                             <input type="password" class="form-input" name="mdp" id="mdp" placeholder="Password"/>
                             <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                        <label for="pp-profil">Photo de profil</label>
+                        <div class="form-group">
+                            <input type="file" class="form-input" name="pp-profil" id="pp-profil" placeholder="Photo de profil"/>
+                    
                         </div>
                       
                        

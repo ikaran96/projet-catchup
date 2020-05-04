@@ -1,5 +1,6 @@
 <?php
-session_start();?>
+session_start();
+include('include/bdd.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,13 +16,13 @@ session_start();?>
 		<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600" rel="stylesheet"> 
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css"/>
 
 		<!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+		<link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,22 +34,20 @@ session_start();?>
     </head>
 	<body>
 <?php
-include 'header.php';
-include 'top-posts.php';
-include 'recent-posts.php';
-include 'big-post.php';
-include 'medium-post.php';
-include 'most-read.php';
-include 'featured-posts.php';
-include 'categories.php';
-include 'tags.php';
-include 'footer.php';
+include 'include/header.php';
+include 'include/top-posts.php';
+include 'include/recent-posts.php';
+include 'include/big-post.php';
+include 'include/medium-post.php';
+include 'include/categories.php';
+include 'include/tags.php';
+include 'include/footer.php';
 ?>
 
 		<!-- jQuery Plugins -->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/main.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/main.js"></script>
 
 	</body>
 </html>
